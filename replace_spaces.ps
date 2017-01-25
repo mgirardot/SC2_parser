@@ -1,0 +1,11 @@
+
+
+$csvfiles=get-childitem . *.csv
+foreach ($file in $csvfiles)
+{
+	(get-content $file.PSPath) | foreach-object {$_ -replace '^(\s+)', '' `
+													-replace "(\s+){2,}","`t"
+													} | Set-Content $file.PSPath
+
+}
+
